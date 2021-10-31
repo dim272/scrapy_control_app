@@ -1,0 +1,56 @@
+{% extends 'template.html' %}
+
+{% block body %}
+<div class="content" id="content">
+    {% for category in data %}
+    <div class="column">
+
+        <ul class="column__list">
+            <li class="column__item column__item--header">
+                {{ category }}
+            </li>
+            {% for spider in data[category] %}
+
+                <li class="column__item item">
+                    {% if data[category][spider]['status'] %}
+                    <div class="item__name item__name--green">{{ spider }}</div>
+                    <div class="item__info">
+                        <div class="item__control">
+                            <form action="/control_button" method="post" class="item__control">
+                                <button name="stop"
+                                        type="submit"
+                                        value="{{ category }}.{{ spider }}:{{ data[category][spider]['pid'] }}">
+
+                                    stop
+
+                                </button>
+                            </form>
+
+                    {% else %}
+                    <div class="item__name item__name--red">{{ spider }}</div>
+                    <div class="item__info">
+                            <form action="/control_button" method="post" class="item__control">
+                                <button name="start"
+                                        type="submit"
+                                        value="{{ category }}.{{ spider }}">
+
+                                    start
+
+                                </button>
+                            </form>
+                    {% endif %}
+
+                        {% if data[category] != 'docker' %}
+                        <a href="{{ data[category][spider]['log_file'] }}" class="item__loglink" target="_blank">log</a>
+                        {% endif %}
+
+                    </div>
+                </li>
+
+            {% endfor %}
+        </ul>
+
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}
