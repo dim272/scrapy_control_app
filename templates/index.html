@@ -40,9 +40,7 @@
                             </form>
                     {% endif %}
 
-                        {% if data[category] != 'docker' %}
-                        <a href="{{ data[category][spider]['log_file'] }}" class="item__loglink" target="_blank">log</a>
-                        {% endif %}
+                    <a href="{{ data[category][spider]['log_file'] }}" class="item__loglink" target="_blank">log</a>
 
                     </div>
                 </li>

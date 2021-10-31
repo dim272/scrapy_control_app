@@ -1,5 +1,4 @@
 # web management interface
-import os.path
 import threading
 import time
 

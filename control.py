@@ -3,8 +3,9 @@ import os
 
 import yaml
 
-PARSERS_PATH = __file__.split('control_app')[0]
-INTERPRETER_PATH = PARSERS_PATH + 'env/bin/python3'
+file_path_list = os.path.normpath(__file__).split('/')
+PARSERS_PATH = '/' + os.path.join(*file_path_list[:-2])
+INTERPRETER_PATH = os.path.join(PARSERS_PATH, *['env', 'bin', 'python3'])
 
 
 class Control():
