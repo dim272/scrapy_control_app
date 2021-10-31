@@ -145,8 +145,11 @@ class Control():
         subprocess.run(command, shell=True)
 
     @staticmethod
-    def stop_spider(pid):
-        command = f'kill {pid}'
+    def stop_spider(category, pid):
+        if category == 'docker':
+            command = f'docker stop {pid}'
+        else:
+            command = f'kill {pid}'
         subprocess.run(command, shell=True)
 
     @staticmethod

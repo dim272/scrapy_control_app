@@ -45,14 +45,17 @@ def success():
     if request.method == 'POST':
         if request.form.get("start"):
             spider = request.form.get("start")
-            category = spider.split('.')[0]
-            spider_name = spider.split('.')[1]
-            control.start_spider(category, spider_name)
         else:
             spider = request.form.get("stop")
-            pid = spider.split(':')[-1]
-            control.stop_spider(pid)
-            print('Stop', spider, pid)
+        category = spider.split('.')[0]
+        spider_name = spider.split('.')[1]
+        pid = spider.split(':')[-1]
+
+        if request.form.get("start"):
+            control.start_spider(category, spider_name)
+        else:
+            control.stop_spider(category, pid)
+
         return render_template('index.html', data=control.status)
 
 
